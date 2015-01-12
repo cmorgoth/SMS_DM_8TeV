@@ -169,11 +169,10 @@ int main(){
     std::string s_aux = ss_aux.str();
     if(sms_aux.find(s_aux) == sms_aux.end()){
       sms_aux[s_aux] = 1;
-      std::cout << "MASS PAIR: " << s_aux << std::endl;
     }
   }
  
-  std::cout << "MAP SIZE: " << sms_aux.size() << std::endl;
+  std::cout << "MAP POINTS: " << sms_aux.size() << std::endl;
   std::map<std::string, SignalStruct> sms_mass_pair;
   
   //Getting Number of Gen Events Histos
@@ -197,11 +196,11 @@ int main(){
     s_fname << mass1 << "_" << mass2;
     SignalStruct aux_struct;
     //xsec = (stop->GetBinContent(stop->FindBin((double)mass1))*1000.0)/50.0;//xsec fb
-    std::cout << "Mass" << mass1 << " == xsec: " << xsec/1000.0 << " pb"<< std::endl;
+    //std::cout << "Mass" << mass1 << " == xsec: " << xsec/1000.0 << " pb"<< std::endl;
     //if(mass1 >= 200.0 )xsec = 33.0*1000.0;//xsec = 33 pb
     aux_struct.Npassed_ISR = GetGenEvents(mass1, mass2, h_Nisr);
     aux_struct.scaleF = Lumi*xsec/aux_struct.Npassed_ISR;
-    std::cout << "scaleF: " << aux_struct.scaleF << std::endl;  
+    //std::cout << "scaleF: " << aux_struct.scaleF << std::endl;  
     
     aux_struct.Npassed_ISR_up = GetGenEvents(mass1, mass2, h_Nisr_up);
     aux_struct.scaleF_up = Lumi*xsec/aux_struct.Npassed_ISR_up;
@@ -214,7 +213,7 @@ int main(){
     //Getting PDF acceptance Histo
     TString sfile = "AccBIS/SMS_";
     sfile = sfile + s_fname.str().c_str() + ".root";
-    std::cout << sfile << std::endl;
+    //std::cout << sfile << std::endl;
     facc = new TFile(sfile);
     for(int i = 0; i < 4; i++){
       TString shisto = TString(Form("PDF_SYS_cat%d",i+1));
@@ -222,7 +221,6 @@ int main(){
       aux_struct.pdf_acc[i] = new TH1F(*((TH1F*)facc->Get(shisto)));
       //std::cout << aux_struct.pdf_acc[i]->GetBinContent(1) << std::endl;
     }
-    std::cout << aux_struct.pdf_acc[0]->GetBinContent(1) << std::endl;
     //Inserting New Struct
     sms_mass_pair[tmp.first] = aux_struct;
     //delete facc;

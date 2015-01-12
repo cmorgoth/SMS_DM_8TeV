@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+#backup file
+*.*~
+
+#ROOT FILES
+*.root

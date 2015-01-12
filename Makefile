@@ -9,21 +9,18 @@ LDFLAGS := $(shell root-config --glibs) $(STDLIBDIR)
 CPPFLAGS += -g
 
 TARGET = CreateAcceptanceSMS
-TARGET2 = DM_Signal_SYS_Final
-TARGET3 = EvalSys
-TARGET4 = PlotDMsignal
+TARGET2 = CreateCombineInputSMS_Signal
+TARGET3 = CreateLimitPlots
 
 SRC = src/CreateAcceptanceSMS.cc src/hlt.cc src/HelperFunctions.cc
-SRC2 = src/DM_Signal_SYS_Final.cc src/hlt.cc
-SRC3 = src/EvaluateSystematics.cc src/DM_1DRatio.cc src/DM_2DRatio.cc src/DM_Base.cc
-SRC4 = src/PLOT_DM_SIGNAL.cc hlt.cc src/DM_1DRatio.cc src/DM_Base.cc
+SRC2 = src/CreateCombineInputSMS_Signal.cc src/hlt.cc src/HelperFunctions.cc
+SRC3 = src/CreateLimitPlots.cc src/hlt.cc src/HelperFunctions.cc
 
 OBJ = $(SRC:.cc=.o)
 OBJ2 = $(SRC2:.cc=.o)
 OBJ3 = $(SRC3:.cc=.o)
-OBJ4 = $(SRC4:.cc=.o)
 
-all : $(TARGET) $(TARGET2) $(TARGET3) $(TARGET4)
+all : $(TARGET) $(TARGET2) $(TARGET3)
 
 $(TARGET) : $(OBJ)
 	$(LD) $(CPPFLAGS) -o $(TARGET) $(OBJ) $(LDFLAGS)
@@ -43,16 +40,10 @@ $(TARGET3) : $(OBJ3)
 	@echo $<
 	@echo $^
 
-$(TARGET4) : $(OBJ4)
-	$(LD) $(CPPFLAGS) -o $(TARGET4) $(OBJ4) $(LDFLAGS)
-	@echo $@
-	@echo $<
-	@echo $^
-
 %.o : %.cc	
 	$(CXX) $(CPPFLAGS) -o $@ -c $<
 	@echo $@	
 	@echo $<
 clean :
-	rm -f *.o src/*.o $(TARGET) $(TARGET2) $(TARGET3) $(TARGET4) *~
+	rm -f *.o src/*.o $(TARGET) $(TARGET2) $(TARGET3) *~
 

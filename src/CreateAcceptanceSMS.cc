@@ -43,6 +43,8 @@ int main(){
   v.push_back(c2B);
   v.push_back(c3B);
   v.push_back(c4B);
+
+  //Obtaining Input File
   TFile* fin = new TFile("SMS-MadGraph_2J_T2cc_NoFilter_mStop-100to250_mLSP-20to230_8TeV.root");
   TTree* outT = (TTree*)fin->Get("outTree");
   float mssm[3];
@@ -402,8 +404,9 @@ int main(){
     TString dummy;
     for(int i = 0; i < 4; i++){
       dummy = Form("PDF_SYS_cat%d",i+1);
+      dummy = sms_s+"_"+dummy;
       tmp.second.h_acc_PDF_up[i]->Write(dummy);
-      tmp.second.h_acc_CENTRAL[i]->Write(dummy+"_central");
+      //tmp.second.h_acc_CENTRAL[i]->Write(dummy+"_central");
     }
   }
   return 0;

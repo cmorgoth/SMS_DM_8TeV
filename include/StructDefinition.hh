@@ -26,4 +26,37 @@ struct pdf_and_ISR{
   TH1F* h_acc_PDF_down[4];
 };
 
+struct SignalStruct{
+
+  double Npassed_ISR;
+  double Npassed_ISR_up;
+  double Npassed_ISR_down;
+  
+  double scaleF;
+  double scaleF_up;
+  double scaleF_down;
+  
+  TH1F* h_rsq[4];
+  TH1F* h_met[4];
+  TH1F* h_njets[4];
+  
+  TH1F* h_rsq_ISR_up[4];
+  TH1F* h_rsq_ISR_down[4];
+  
+  TH1F* h_rsq_JES_up[4];
+  TH1F* h_rsq_JES_down[4];
+  
+  TH1F* h_rsq_PDF_up[4];
+  TH1F* h_rsq_PDF_down[4];
+  
+  TH1F* s_up[4];
+  TH1F* s_down[4];
+
+  TH1F* pdf_acc[4];
+};
+
+struct LimitMinMax{
+  float Min;
+  float Max;
+};
 #endif
